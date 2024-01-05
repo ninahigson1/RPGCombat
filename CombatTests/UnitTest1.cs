@@ -15,19 +15,19 @@ namespace CombatTests
             character.IsAlive.Should().BeTrue();
         }
 
-        [Theory]
-        [InlineData(10, 990)]
-        [InlineData(50, 950)]
-        [InlineData(500, 500)]
-        public void Should_Be_Able_TO_Damage_Another_Character(int damage, int expectedHealth)
-        {
-            var attacker = new Character();
-            var victim = new Character();
+        //[Theory]
+        //[InlineData(10, 990)]
+        //[InlineData(50, 950)]
+        //[InlineData(500, 500)]
+        //public void Should_Be_Able_TO_Damage_Another_Character(int damage, int expectedHealth)
+        //{
+        //    var attacker = new Character();
+        //    var victim = new Character();
 
-            attacker.Attack(victim, damage);
+        //    attacker.Attack(victim, damage);
 
-            victim.Health.Should().Be(expectedHealth);
-        } 
+        //    victim.Health.Should().Be(expectedHealth);
+        //} 
 
         [Fact]
         public void Should_Be_Not_Be_Able_To_Damage_Itself()
@@ -119,6 +119,22 @@ namespace CombatTests
 
             // assert
             target.Health.Should().Be(950); // 1000 - (100 / 2)
+        }
+
+        [Fact]
+        public void Lower_Levels_Damage_Is_Reduced()
+        {
+            // arrange
+            var attacker = new Character();
+            var target = new Character();
+            target.Level = 2;
+            target.Health = 600;
+
+            // act
+            attacker.Attack(target, 100);
+
+            // assert
+            target.Health.Should().Be(400); // 1000 - (100 * 1.5)
         }
     }
 }

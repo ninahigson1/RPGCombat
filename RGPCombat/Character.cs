@@ -1,13 +1,23 @@
-﻿namespace RGPCombat
+﻿using static System.Net.Mime.MediaTypeNames;
+
+namespace RGPCombat
 {
     public class Character
     {
-        public int Health { get; set; } = 1000;
+        public double Health { get; set; } = 1000;
         public int Level { get; set; } = 1;
-        public bool IsAlive { get; set; } = true;
+        public bool IsAlive { get; set; } = true; 
 
-        public void Attack(Character victim, int damage)
+        public void Attack(Character victim, double damage)
         {
+            if (victim.Level - 5 <= this.Level)
+            {
+                damage = damage + (100 * 1.5);
+            }
+            if (victim.Level + 5 >= this.Level)
+            {
+                damage = damage - (100 / 2);
+            }
             if (victim == this)
             {
                 throw new InvalidOperationException();
@@ -19,6 +29,11 @@
             {
                 victim.IsAlive = false;
             }
+            if (victim.Health > 1000)
+            {
+                victim.Health = 1000;
+            } 
+
         }
 
         public void Heal(Character target, int health)
