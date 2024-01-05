@@ -10,13 +10,14 @@ namespace RGPCombat
 
         public void Attack(Character victim, double damage)
         {
-            if (victim.Level - 5 <= this.Level)
+            if (victim.Level <= this.Level - 5)
             {
-                damage = damage + (100 * 1.5);
+                damage = damage *= 1.5;
             }
-            if (victim.Level + 5 >= this.Level)
+
+            if (victim.Level >= this.Level + 5)
             {
-                damage = damage - (100 / 2);
+                damage = damage / 2;
             }
             if (victim == this)
             {

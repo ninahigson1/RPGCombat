@@ -128,6 +128,7 @@ namespace CombatTests
             var attacker = new Character();
             var target = new Character();
             target.Level = 2;
+            attacker.Level = 10;
 
             // act
             attacker.Attack(target, 100);
