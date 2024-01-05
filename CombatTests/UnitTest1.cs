@@ -122,19 +122,18 @@ namespace CombatTests
         }
 
         [Fact]
-        public void Lower_Levels_Damage_Is_Reduced()
+        public void Lower_Levels_Damage_Is_Increased()
         {
             // arrange
             var attacker = new Character();
             var target = new Character();
             target.Level = 2;
-            target.Health = 600;
 
             // act
             attacker.Attack(target, 100);
 
             // assert
-            target.Health.Should().Be(400); // 1000 - (100 * 1.5)
+            target.Health.Should().Be(850); // 1000 - (100 * 1.5)
         }
     }
 }
